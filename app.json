@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "cascadia-app",
+    "slug": "cascadia-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+	"image": "./assets/splash.png",
+	"backgroundColor": "#814750"
+    }
+  }
+}
