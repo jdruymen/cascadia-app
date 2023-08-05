@@ -4,7 +4,7 @@ Use [`expo-router`](https://expo.github.io/router) to build native navigation us
 
 ## 🚀 How to run
 
-Install ['Expo'], a framework based on react native, via this guide [here](https://docs.expo.dev/get-started/installation/)
+Install ['Expo'](https://docs.expo.dev/get-started/installation/), a framework based on react native, via this guide [here](https://docs.expo.dev/get-started/installation/)
 
 Once installed, run in powershell
 
