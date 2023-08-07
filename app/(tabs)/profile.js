@@ -1,11 +1,19 @@
 import { Link } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useAuth } from "../../components/auth";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function index() {
+export default function Accout() {
+    const { setUser, user } = useAuth();
+    
     return (
-        <View style={styles.container}>
-            <Text>Profile</Text>
-        </View>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Account</Text>
+        <Text>{ user && user.name }</Text>
+        <TouchableOpacity onPress={() => setUser(null)}>
+          <Text>Log out</Text>
+        </TouchableOpacity>
+      </View>
     );
 }
 
