@@ -7,7 +7,7 @@ import Colors from '../../components/Colors';
 import { Link } from '../modal';
 
 function TabBarIcon(props) {
-    return React.createElement(FontAwesome, { size: 28, style: { marginBottom: -3 }, ...props });
+    return React.createElement(FontAwesome5, { size: 28, style: { marginBottom: -3 }, ...props });
 }
 
 export default function TabLayout() {

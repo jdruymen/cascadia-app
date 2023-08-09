@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useAuth } from "../../components/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function Accout() {
+export default function Account() {
     const { setUser, user } = useAuth();
     
     return (
