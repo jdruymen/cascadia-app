@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function index() {
     return (
         <View style={styles.container}>
-            <Link href={"/(tabs)/menu"}>Go to menu</Link>
+            <Link href={"/signUp"}>Go to sign-up page</Link>
         </View>
     );
 }
