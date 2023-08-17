@@ -3,7 +3,7 @@ import { Link } from 'expo-router';
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 
-export default function menuItem({ img, label, category }) {
+export default function menuCategory({ img, label, category }) {
     return (
         <Link href={{ 
             pathname: '../menu/[id]',

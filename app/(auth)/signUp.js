@@ -1,19 +1,26 @@
 import { auth } from "../../firebaseConfig";
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View, Pressable} from 'react-native';
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function signUp() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
 
   const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user;
-        console.log(user.email);
-      })
-      .catch(error => alert(error.message))
+    if (password === confirmPass) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(userCredential => {
+          const user = userCredential.user;
+          updateProfile(user, { displayName: name });
+          console.log("Registered with: ", user.email);
+        })
+        .catch(error => alert(error.message))
+    } else {
+      alert("Passwords do not match");
+    }
   };
 
   return (
@@ -24,6 +31,12 @@ export default function signUp() {
       <Text style={styles.header}>Create an account</Text>
       <View style={styles.inputContainer}>
         <TextInput
+          placeholder="Name"
+          value={name}
+          onChangeText={text=>setName(text)}
+          style={styles.input}
+        />
+        <TextInput
           placeholder="Email"
           value={email}
           onChangeText={text=>setEmail(text)}
@@ -33,6 +46,13 @@ export default function signUp() {
           placeholder="Password"
           value={password}
           onChangeText={text=>setPassword(text)}
+          style={styles.input}
+          secureTextEntry
+        />
+        <TextInput
+          placeholder="Confirm password"
+          value={confirmPass}
+          onChangeText={text=>setConfirmPass(text)}
           style={styles.input}
           secureTextEntry
         />
@@ -83,6 +103,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     borderRadius: 10,
+    alignItems: 'center',
   },
   buttonText: {
       color: 'white',
