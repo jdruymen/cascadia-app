@@ -25,21 +25,25 @@ export default function TabLayout() {
                         <TabBarIcon name="pizza-slice" size={24} color={color} />
                     ),
                     title: "Order",
-                    headerRight: () => (
-                        <Link href="/modal" asChild>
-                            <Pressable>
-                                {({ pressed }) => (
-                                    <FontAwesome
-                                        name="info-circle"
-                                        size={25}
-                                        color={Colors[colorScheme || 'dark'].text}
-                                        style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                                    />
-                                )}
-                            </Pressable>
-                        </Link>
-                    ),
                 }} 
+            />
+            <Tabs.Screen 
+                name="map"
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <TabBarIcon name="map" size={24} color={color} />
+                    ),
+                    title: "Map",
+                }}
+            />
+            <Tabs.Screen
+                name="calendar"
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <TabBarIcon name="calendar" size={24} color={color} />
+                    ),
+                    title: "Calendar",
+                }}
             />
             <Tabs.Screen
                 name="profile"

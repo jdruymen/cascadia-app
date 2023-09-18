@@ -23,7 +23,6 @@ export default function pizzaMenu() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 50,
     },
     header: {
         backgroundColor: 'red',
