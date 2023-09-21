@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Link, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { Pressable } from "react-native";
 
 export default function index() {
     const params = useLocalSearchParams();
-
+    const imgNum = parseInt(params.img)
     const data = { name: "John H." };
 
     async function createOrder() {
@@ -26,7 +26,10 @@ export default function index() {
 
     return (
         <View style={styles.container}>
-            <Image uri={params.img} style={styles.image} />
+            <Stack.Screen options={{
+                headerTitle: params.label,
+            }} />
+            <Image source={imgNum} style={styles.image} />
             <Text>{params.label}</Text>
             <Text>{params.price}</Text>
             <View style={styles.buttonContainer}>
@@ -47,7 +50,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
     image: {
-        maxWidth: "70%",
+        resizeMode: "contain",
+        height: 250,
     },
     buttonContainer: {
         width: '60%',

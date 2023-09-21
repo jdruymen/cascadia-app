@@ -7,17 +7,39 @@ export default function Calendar() {
 
   return (
     <View style={styles.container}>
-      <CalendarPicker
-      onDateChange={setSelectedDate}
-      />
+      <View style={styles.topContainer}>
+        <CalendarPicker
+          onDateChange={setSelectedDate}
+        />
+      </View>
+      <View style={styles.bottomContainer}>
+        <View style={styles.event}>
+          <Text style={styles.eventText}>Volition Brewery - 12pm to 7pm</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+
+    },
+    topContainer: {
+      paddingTop: 50,
+      paddingBottom: 50,
+    },
+    bottomContainer: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    event: {
+      width: '90%',
+      borderColor: "black",
+      borderWidth: 1,
+      borderRadius: 10,
+    },
+    eventText: {
+      paddingLeft: 10,
     }
 });

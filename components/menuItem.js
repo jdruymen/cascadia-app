@@ -1,15 +1,17 @@
 import {StyleSheet, View, Pressable, Text, Image} from 'react-native';
 import { Link } from 'expo-router';
+import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function menuItem({ img, label, price, id }) {
     return (
         <Link href={{ pathname: '../menu/item', params: { id: id, img: img, label: label, price: price }}} asChild>
+            
             <Pressable style={styles.rowItem} android_ripple={{ borderless: false }}>
                 <Image source={img} style={styles.image} />
                 <Text style={styles.label}>{label}</Text>
                 <View style={styles.endContainer}>
                     <Text style={styles.price}>{price}</Text>
-                    <Text>{">"}</Text>
+                    <FontAwesome5 name="caret-right" style={styles.icon} />
                 </View>
             </Pressable>
         </Link>
@@ -20,7 +22,7 @@ const styles = StyleSheet.create({
     rowItem: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderColor: '#383838',
         paddingBottom: 5,
@@ -37,8 +39,14 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 20,
+        paddingRight: 10,
+    },
+    icon: {
+        fontSize: 25,
     },
     endContainer: {
-        justifyContent: 'flex-end',
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        paddingRight: 25,
     }
 });
