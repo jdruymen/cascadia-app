@@ -1,50 +1,115 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Pressable} from 'react-native';
+import { ref, onValue } from "firebase/database";
+import { database } from '../../../firebaseConfig';
 
 import MenuItem from '../../../components/menuItem';
-import { breadsticks, redPizzas, garlicPizzas, bbqPizzas } from '../../menuData';
+import { breadsticksImgs, redImgs, garlicImgs, bbqImgs } from '../../menuData';
+import { useEffect, useState } from 'react';
 
 export default function pizzaMenu() {
-    return (
-        <View style={styles.container}>
-            <ScrollView>
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Wood Fired Breadsticks</Text>
-                </View>
-                {breadsticks.map((pizza) => {
-                    return (
-                        <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id}  key={pizza.key} />
-                    )
-                })}
+    const dbRef = ref(database);
+    const [breadsticks, setBreadsticks] = useState([]);
+    const [redPizzas, setRedPizzas] = useState([]);
+    const [garlicPizzas, setGarlicPizzas] = useState([]);
+    const [bbqPizzas, setBbqPizzas] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    
+    useEffect(() => {
+        onValue(ref(database, "menu/pizzas/breadsticks"), (snapshot) => {
+            const data = snapshot.val();
+            const pizzaData = Object.keys(data).map(key => ({
+                key: key,
+                id: key,
+                img: breadsticksImgs.find((pizza) => pizza.key === key).img,
+                name: data[key].name,
+                price: data[key].price,
+            }));
+            setBreadsticks(pizzaData);
+        });
+        onValue(ref(database, "menu/pizzas/red_pizzas"), (snapshot) => {
+            const data = snapshot.val();
+            const pizzaData = Object.keys(data).map(key => ({
+                key: key,
+                id: key,
+                img: redImgs.find((pizza) => pizza.key === key).img,
+                name: data[key].name,
+                price: data[key].price,
+            }));
+            setRedPizzas(pizzaData);
+        });
+        onValue(ref(database, "menu/pizzas/garlic_pizzas"), (snapshot) => {
+            const data = snapshot.val();
+            const pizzaData = Object.keys(data).map(key => ({
+                key: key,
+                id: key,
+                img: garlicImgs.find((pizza) => pizza.key === key).img,
+                name: data[key].name,
+                price: data[key].price,
+            }));
+            setGarlicPizzas(pizzaData);
+        });
+        onValue(ref(database, "menu/pizzas/bbq_pizzas"), (snapshot) => {
+            const data = snapshot.val();
+            const pizzaData = Object.keys(data).map(key => ({
+                key: key,
+                id: key,
+                img: bbqImgs.find((pizza) => pizza.key === key).img,
+                name: data[key].name,
+                price: data[key].price,
+            }));
+            setBbqPizzas(pizzaData);
+        });
+        setLoading(false);
+    }, []);
+    
+    if(!isLoading) {
+        return (
+            <View style={styles.container}>
+                <ScrollView>
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>Wood Fired Breadsticks</Text>
+                    </View>
 
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Red Sauce Pizzas</Text>
-                </View>
-                {redPizzas.map((pizza) => {
-                    return (
-                        <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
-                    )
-                })}
+                    {breadsticks.map((pizza) => {
+                        return (
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                        )
+                    })}
 
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>Garlic Pizzas</Text>
-                </View>
-                {garlicPizzas.map((pizza) => {
-                    return (
-                        <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
-                    )
-                })}
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>Red Sauce Pizzas</Text>
+                    </View>
+                    
+                    {redPizzas.map((pizza) => {
+                        return (
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                        )
+                    })}
 
-                <View style={styles.header}>
-                    <Text style={styles.headerText}>BBQ Pizzas</Text>
-                </View>
-                {bbqPizzas.map((pizza) => {
-                    return (
-                        <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
-                    )
-                })}
-            </ScrollView>
-        </View>
-    );
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>Garlic Pizzas</Text>
+                    </View>
+                    
+                    {garlicPizzas.map((pizza) => {
+                        return (
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                        )
+                    })}
+
+                    <View style={styles.header}>
+                        <Text style={styles.headerText}>BBQ Pizzas</Text>
+                    </View>
+                    
+                    {bbqPizzas.map((pizza) => {
+                        return (
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                        )
+                    })}
+
+                </ScrollView>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

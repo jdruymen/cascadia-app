@@ -10,7 +10,7 @@ export default function menuItem({ img, label, price, id }) {
                 <Image source={img} style={styles.image} />
                 <Text style={styles.label}>{label}</Text>
                 <View style={styles.endContainer}>
-                    <Text style={styles.price}>{price}</Text>
+                    <Text style={styles.price}>${price}</Text>
                     <FontAwesome5 name="caret-right" style={styles.icon} />
                 </View>
             </Pressable>

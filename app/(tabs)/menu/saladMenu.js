@@ -1,9 +1,28 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useEffect, useState } from "react";
+import { onValue, ref } from 'firebase/database';
 
+import { database } from "../../../firebaseConfig";
 import MenuItem from '../../../components/menuItem';
-import { salads } from '../../menuData';
+import { saladImgs } from '../../menuData';
 
-export default function pizzaMenu() {
+export default function saladMenu() {
+    const [salads, setSalads] = useState([]);
+
+    useEffect(() => {
+        onValue(ref(database, "menu/salads"), (snapshot) => {
+            const data = snapshot.val();
+            const saladData = Object.keys(data).map(key => ({
+                key: key,
+                id: key,
+                img: saladImgs.find((salad) => salad.key === key).img,
+                name: data[key].name,
+                price: data[key].price,
+            }));
+            setSalads(saladData);
+        });
+    }, []);
+
     return (
         <View style={styles.container}>
             <ScrollView>

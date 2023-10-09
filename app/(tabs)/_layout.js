@@ -25,6 +25,7 @@ export default function TabLayout() {
                         <TabBarIcon name="pizza-slice" size={24} color={color} />
                     ),
                     title: "Order",
+                    headerShown: false,
                 }} 
             />
             <Tabs.Screen 
@@ -34,6 +35,7 @@ export default function TabLayout() {
                         <TabBarIcon name="map" size={24} color={color} />
                     ),
                     title: "Map",
+                    headerShown: false,
                 }}
             />
             <Tabs.Screen
@@ -43,6 +45,7 @@ export default function TabLayout() {
                         <TabBarIcon name="calendar" size={24} color={color} />
                     ),
                     title: "Calendar",
+                    headerShown: false,
                 }}
             />
             <Tabs.Screen
@@ -52,6 +55,7 @@ export default function TabLayout() {
                         <TabBarIcon name="user" size={24} color={color} />
                     ),
                     title: "Profile",
+                    headerShown: false,
                 }}
             />
             <Tabs.Screen
@@ -61,6 +65,7 @@ export default function TabLayout() {
                         <TabBarIcon name="shopping-cart" size={24} color={color} />
                     ),
                     title: "Cart",
+                    headerShown: false,
                 }}
             />
         </Tabs>
