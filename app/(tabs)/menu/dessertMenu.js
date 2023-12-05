@@ -18,6 +18,7 @@ export default function dessertMenu() {
                 img: dessertImgs.find((dessert) => dessert.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setDesserts(dessertData);
         });
@@ -30,7 +31,7 @@ export default function dessertMenu() {
                 </View>
                 {desserts.map((dessert) => {
                     return (
-                        <MenuItem img={dessert.img} label={dessert.name} price={dessert.price} id={dessert.id}  key={dessert.key} />
+                        <MenuItem img={dessert.img} label={dessert.name} price={dessert.price} id={dessert.id}  key={dessert.key} available={dessert.available} category={4} />
                     )
                 })}
             </ScrollView>

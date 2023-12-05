@@ -18,6 +18,7 @@ export default function appetizerMenu() {
                 img: appetizerImgs.find((appetizer) => appetizer.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setAppetizers(appetizerData);
         });
@@ -30,7 +31,7 @@ export default function appetizerMenu() {
                 </View>
                 {appetizers.map((appetizer) => {
                     return (
-                        <MenuItem img={appetizer.img} label={appetizer.name} price={appetizer.price} id={appetizer.id}  key={appetizer.key} />
+                        <MenuItem img={appetizer.img} label={appetizer.name} price={appetizer.price} id={appetizer.id}  key={appetizer.key} available={appetizer.available} category={0}/>
                     )
                 })}
             </ScrollView>

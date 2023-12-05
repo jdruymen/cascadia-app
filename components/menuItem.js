@@ -2,9 +2,9 @@ import {StyleSheet, View, Pressable, Text, Image} from 'react-native';
 import { Link } from 'expo-router';
 import { FontAwesome5 } from "@expo/vector-icons";
 
-export default function menuItem({ img, label, price, id }) {
+export default function menuItem({ img, label, price, id, available, category }) {
     return (
-        <Link href={{ pathname: '../menu/item', params: { id: id, img: img, label: label, price: price }}} asChild>
+        <Link href={{ pathname: '../menu/item', params: { id: id, img: img, label: label, price: price, available: available, category: category }}} asChild>
             
             <Pressable style={styles.rowItem} android_ripple={{ borderless: false }}>
                 <Image source={img} style={styles.image} />

@@ -18,6 +18,7 @@ export default function sandwichMenu() {
                 img: sandwichImgs.find((sandwich) => sandwich.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setSandwiches(sandwichData);
         });
@@ -31,7 +32,7 @@ export default function sandwichMenu() {
                 </View>
                 {sandwiches.map((sandwich) => {
                     return (
-                        <MenuItem img={sandwich.img} label={sandwich.name} price={sandwich.price} id={sandwich.id}  key={sandwich.key} />
+                        <MenuItem img={sandwich.img} label={sandwich.name} price={sandwich.price} id={sandwich.id}  key={sandwich.key} available={sandwich.available} category={3} />
                     )
                 })}
             </ScrollView>

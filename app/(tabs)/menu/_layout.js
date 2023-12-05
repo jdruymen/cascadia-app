@@ -9,6 +9,7 @@ export default () => {
             <Stack.Screen name="saladMenu" options={{ headerTitle: "Salads" }} />
             <Stack.Screen name="sandwichMenu" options={{ headerTitle: "Sandwiches" }} />
             <Stack.Screen name="dessertMenu" options={{ headerTitle: "Desserts" }} />
+            <Stack.Screen name="item" />
         </Stack>
     );
 };

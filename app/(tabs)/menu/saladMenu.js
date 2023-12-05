@@ -18,6 +18,7 @@ export default function saladMenu() {
                 img: saladImgs.find((salad) => salad.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setSalads(saladData);
         });
@@ -31,7 +32,7 @@ export default function saladMenu() {
                 </View>
                 {salads.map((salad) => {
                     return (
-                        <MenuItem img={salad.img} label={salad.name} price={salad.price} id={salad.id}  key={salad.key} />
+                        <MenuItem img={salad.img} label={salad.name} price={salad.price} id={salad.id}  key={salad.key} available={salad.available} category={1} />
                     )
                 })}
             </ScrollView>

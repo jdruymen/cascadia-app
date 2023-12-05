@@ -23,6 +23,7 @@ export default function pizzaMenu() {
                 img: breadsticksImgs.find((pizza) => pizza.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setBreadsticks(pizzaData);
         });
@@ -34,6 +35,7 @@ export default function pizzaMenu() {
                 img: redImgs.find((pizza) => pizza.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setRedPizzas(pizzaData);
         });
@@ -45,6 +47,7 @@ export default function pizzaMenu() {
                 img: garlicImgs.find((pizza) => pizza.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setGarlicPizzas(pizzaData);
         });
@@ -56,6 +59,7 @@ export default function pizzaMenu() {
                 img: bbqImgs.find((pizza) => pizza.key === key).img,
                 name: data[key].name,
                 price: data[key].price,
+                available: data[key].available,
             }));
             setBbqPizzas(pizzaData);
         });
@@ -72,7 +76,7 @@ export default function pizzaMenu() {
 
                     {breadsticks.map((pizza) => {
                         return (
-                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} available={pizza.available} category={2} />
                         )
                     })}
 
@@ -82,7 +86,7 @@ export default function pizzaMenu() {
                     
                     {redPizzas.map((pizza) => {
                         return (
-                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} available={pizza.available} category={2} />
                         )
                     })}
 
@@ -92,7 +96,7 @@ export default function pizzaMenu() {
                     
                     {garlicPizzas.map((pizza) => {
                         return (
-                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} available={pizza.available} category={2} />
                         )
                     })}
 
@@ -102,7 +106,7 @@ export default function pizzaMenu() {
                     
                     {bbqPizzas.map((pizza) => {
                         return (
-                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} />
+                            <MenuItem img={pizza.img} label={pizza.name} price={pizza.price} id={pizza.id} key={pizza.key} available={pizza.available} category={2} />
                         )
                     })}
 
