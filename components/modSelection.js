@@ -2,17 +2,19 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 
-export default function ModSelection({ mod, price, onSelect }) {
-    const [toggleCheckbox, setToggleCheckbox] = useState(false);
+export default function ModSelection({ mod, price, onSelect, modList }) {
+    const modSet = new Set(modList)
+    const [toggleCheckbox, setToggleCheckbox] = useState(modSet.has(mod));
 
     function toggle() {
         setToggleCheckbox(!toggleCheckbox);
+        onSelect(mod);
     };
 
     return (
         <Pressable style={styles.container} onPress={toggle}> 
             <View style={styles.leftContainer}>
-                <Checkbox disabled={false} value={toggleCheckbox} onValueChange={(newValue) => setToggleCheckbox(newValue)} />
+                <Checkbox disabled={false} value={toggleCheckbox} onValueChange={toggle} />
                 <Text style={styles.label}>{mod}</Text>
             </View>
             

@@ -1,18 +1,24 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import { Stack, useLocalSearchParams, useRouter, Link } from "expo-router";
 import { Pressable } from "react-native";
 import { useState } from "react";
+import { database, auth } from "../../../firebaseConfig";
+import { ref, push, set,  } from "firebase/database";
 import Modifier from "../../../components/modifier";
 
 export default function index() {
+    const [quantity, setQuantity] = useState(1);
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [modifiers, setModifiers] = useState([]);
+
     const params = useLocalSearchParams();
     const imgNum = parseInt(params.img)
-    const [quantity, setQuantity] = useState(1);
-    const data = { name: "John H." };
     const router = useRouter();
-    const [isModalVisible, setModalVisible] = useState(false);
+
 
     async function createOrder() {
+        const data = { name: "John H." };
+
         fetch("https://cascadia-express-test.azurewebsites.net/createOrder", {
             method: "POST",
             headers: {
@@ -31,6 +37,15 @@ export default function index() {
 
     function addItem() {
         if (params.available === "true") {
+            const listRef = ref(database, 'carts/' + auth.currentUser?.uid);
+            const newListRef = push(listRef);
+            set(newListRef, {
+                name: params.label,
+                price: params.price,
+                quantity: quantity,
+                mods: modifiers,
+            });
+            
             router.back();
         }
         else {
@@ -40,7 +55,7 @@ export default function index() {
 
     function decreaseQ() {
         if (quantity != 1) {
-            setQuantity( quantity - 1 )
+            setQuantity( quantity - 1 ) 
         }
     };
 
@@ -54,7 +69,8 @@ export default function index() {
         setModalVisible(true);
     };
 
-    const onModalClose = () => {
+    const onModalClose = (selectedMods) => {
+        setModifiers([...selectedMods]);
         setModalVisible(false);
     };
 
@@ -69,6 +85,19 @@ export default function index() {
             <View style={styles.bottomContainer}>
 
                 <Image source={imgNum} style={styles.image} />
+                
+                <View style={{ paddingTop: 10, paddingBottom: 10, }}>
+                    {modifiers.length != 0 && (
+                        <View>
+                        <FlatList data={modifiers.slice(0, 3)} renderItem={({item}) => 
+                            <Text style={{ marginLeft: "auto", paddingRight: "5%" }}>{item}</Text>
+                        } />
+                        {modifiers.length > 3 && (
+                            <Text style={{ marginLeft: "auto", paddingRight: "5%" }}>And {modifiers.length - 3} more...</Text>
+                        )}
+                        </View>
+                    )}
+                </View>
 
                 <View style={styles.quantitySelector}>
                     <Pressable style={styles.roundButton} onPress={decreaseQ}>
@@ -95,7 +124,7 @@ export default function index() {
                         <Text style={styles.buttonText}>Add to cart</Text>
                     </Pressable>
                 </View>
-                <Modifier isVisible={isModalVisible} onClose={onModalClose} itemCategory={params.category} />
+                <Modifier isVisible={isModalVisible} onClose={onModalClose} itemCategory={params.category} itemId={params.id} modifiers={modifiers} />
             </View>
         </View>
     );
@@ -119,7 +148,7 @@ const styles = StyleSheet.create({
     image: {
         resizeMode: "contain",
         height: 250,
-        alignSelf: "center"
+        alignSelf: "center",
     },
     buttonContainer: {
         width: '60%',

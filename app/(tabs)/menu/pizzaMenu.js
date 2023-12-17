@@ -7,7 +7,6 @@ import { breadsticksImgs, redImgs, garlicImgs, bbqImgs } from '../../menuData';
 import { useEffect, useState } from 'react';
 
 export default function pizzaMenu() {
-    const dbRef = ref(database);
     const [breadsticks, setBreadsticks] = useState([]);
     const [redPizzas, setRedPizzas] = useState([]);
     const [garlicPizzas, setGarlicPizzas] = useState([]);

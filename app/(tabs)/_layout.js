@@ -4,7 +4,6 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import { Pressable, useColorScheme } from 'react-native';
 
 import Colors from '../../components/Colors';
-import { Link } from '../modal';
 
 function TabBarIcon(props) {
     return React.createElement(FontAwesome5, { size: 28, style: { marginBottom: -3 }, ...props });
